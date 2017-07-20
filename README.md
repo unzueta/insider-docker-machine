@@ -1,4 +1,4 @@
-# Windows Server 2016 Insider with Docker
+# Windows Server 2016 Insider with Docker Toolbox for Windows
 
 This is a special version of my [windows-docker-machine](https://github.com/StefanScherer/windows-docker-machine) repo for the Windows Server Insider Preview. Get in touch with Windows Containers and the much smaller nanoserver-insider Docker image on your Mac, Linux or Windows machine. Create a local VM that runs in parallel to Docker for Mac/Win.
 
@@ -15,8 +15,8 @@ It is tested on a Mac with the following steps.
 ```bash
 git clone https://github.com/StefanScherer/packer-windows
 cd packer-windows
-packer build --only=vmware-iso --var iso_url=~/Downloads/Windows_InsiderPreview_Server_2_16237.iso windows_2016_insider.json
-vagrant box add windows_2016_insider windows_2016_insider_vmware.box
+packer build --only=virtualbox-iso --var iso_url=~/Downloads/Windows_InsiderPreview_Server_2_16237.iso windows_2016_insider.json
+vagrant box add windows_2016_insider windows_2016_insider
 ```
 
 This Vagrant basebox has Docker 17.06.0 CE installed and the following base images are already pulled from Docker Hub:
@@ -37,6 +37,9 @@ There is also some languages and runtimes available as insider images:
 ```
 git clone https://github.com/StefanScherer/insider-docker-machine
 cd insider-docker-machine
+```
+Copy the file windows_2016_insider this folder
+```
 vagrant up
 ```
 
@@ -46,13 +49,13 @@ switch very easily between Docker 4 Mac/Win and this Insider VM.
 5. Switch to the Insider Docker machine
 
 ```
-eval $(docker-machine env insider)
-docker version
-docker images
+PS: docker-machine env insider |iex
+PS: docker version
+PS: docker images
 ```
 
 6. Switch back to Docker for Mac/Windows
 
 ```
-eval $(docker-machine env -unset)
+docker-machine env -unset
 ```
